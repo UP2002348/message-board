@@ -1,0 +1,23 @@
+{
+  "name": "message-board",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node svr.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UP2002348/message-board.git"
+  },
+  "author": "university of porsmouth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UP2002348/message-board/issues"
+  },
+  "homepage": "https://github.com/UP2002348/message-board#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
