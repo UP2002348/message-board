@@ -1,40 +1,38 @@
 import express from 'express';
-import uuid from 'uuid-random'
+import * as mb from './messageboard.mjs';
 
 const app = express();
-app.use(express.static('client'));
+app.use(express.static('client', {extensions : ['html']}));
 
-let messages = [
-    {id: 'abeoirjfkmal', msg: 'These are three default messagesssss', time: 'a minute ago'},
-    {id: 'peufjkglsmne', msg: 'delivered from the server', time: 'last week'},
-    {id: 'poeifpaytlmk', msg: 'using a custom route', time: 'last month'},
-];
+function getMessages(req, res){
+    res.json(mb.listMessages());
+}
 
-app.get('/messages', (req, res) =>{
-    res.json(messages);
-});
 
-app.get('/messages/:id', (req, res) =>{
-    for (const message of messages){
-        if (message.id === req.params.id){
-            res.json(message);
-            return;
-        }
+function getMessage(req, res){
+    const result = mb.findMessage(req.params.id);
+    if (!result){
+        res.status(404).send('No match for that ID.');
+        return;
     }
+    res.json(result);
+}
 
-    res.status(404).send('No match for that ID.');
-});
 
-app.post('/messages', express.json(), (req, res) => {
-    const newMessage = {
-        id: uuid(),
-        msg: req.body.msg,
-        time: Date(),
-    };
-
-    messages = [newMessage, ...messages.slice(0,9)];
+function postMessage(req, res){
+    const messages = mb.addMessage(req.body.msg);
     res.json(messages);
-});
+}
+
+function putMessage(req, res) {
+    const message = mb.editMessage(req.body);
+    res.json(message)
+}
+
+app.get('/messages', getMessages);
+app.get('/messages/:id', getMessage);
+app.put('/messages/:id', express.json(), putMessage);
+app.post('/messages', express.json(), postMessage);
 
 app.listen(8080);
 
