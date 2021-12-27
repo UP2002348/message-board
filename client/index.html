@@ -3,7 +3,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="index.js"></script>
+    <script src="index.js" type='module'></script>
+    <link rel="stylesheet" href="style.css">
     <title>Message Board</title>
 </head>
 <body>
@@ -13,9 +14,11 @@
     <input id="message" type="text" placeholder="Add a message here...">
     <input id="send" type="submit" value="Send">
 
+    <label id="avatar">Avatar: <input type="file" id="avatarfile" accept="image/png, image/jpeg"><label>
+
     <ul id="messagelist">
-        <li>One day this will be a message board</li>
-        <li>Until then we can dream.</li>
+        <li><img class="avatar" src="/images/user.png" alt=""> One day this will be a message board</li>
+        <li><img class="avatar" src="/images/user.png" alt=""> Until then we can dream.</li>
     </ul>
 
     <aside id="detail">
@@ -23,3 +26,5 @@
     </aside>
 </body>
 </html>
+
+<!-- finished at 1:30:42 -->
